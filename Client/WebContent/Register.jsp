@@ -89,35 +89,31 @@ width:100%;
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
-	$(document).ready(function() {
-		$('#submit').click(function() {
-		var details ={
-	    firstname = $('#firstname').val();
-		lastname = $('#lastname').val(); 
-	    mobnum = $('#mobnum').val(); 
-		address = $('#address').val();
-		mail = $('#mail').val();
-		date = $('#date').val();
-		username = $('#username').val(); 
-		password1 = $('#password1').val(); 
-	    password2 = $('#password2').val();
-		};
-			$.ajax({  
-	        url: 'Registrationservlet',  
-	        method: 'post',  
-	        data:   '{dtls: ' + JSON.stringify(details) + '}',  
-	        contentType: "application/json",  
-	        dataType: "json",  
-	        success: function () {  
-	            console.log(data);  
-	        },  
-	        error: function (err) {  
-	            console.log(err);  
-	        }, 
-	    });
+		$(function() {
+			$("[id*=submit]").click(function() {
+				var v_data = {};
+				v_data.firstname = $.trim($("[id*=firstname").val());
+				v_data.lastname = $.trim($("[id*=lastname]").val());
+				v_data.mobnum = $.trim($("[id*=mobnum]").val());
+				v_data.address = $.trim($("[id*=address]").val());
+				v_data.mail = $.trim($("[id*=mail]").val());
+				v_data.date = $.trim($("[id*=date]").val());
+				v_data.username = $.trim($("[id*=username]").val());
+				v_data.password1 = $.trim($("[id*=password1]").val());
+				v_data.password2 = $.trim($("[id*=password2]").val());
+					$.ajax({
+					type : "POST",
+					url : "loginservlet",
+					data : JSON.stringify(v_data),
+					contentType : "application/json; charset=utf-8",
+					dataType : "json",
+					success : function(result) {
+						console.log("done");
+					}
+				});
+				return false;
+			});
 		});
-	
-	
-	</script> 
+	</script>
 </body>
 </html>
