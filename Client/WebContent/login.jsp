@@ -84,25 +84,22 @@ img.avatar {
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('#submit').click(function() {// as soon submit form , click handler assig and adds callback function
-				var data = {
-					username : $('#username').val(),
-					password : $('#password').val()
-				};
-						$.ajax({
+		$(function() {
+			$("[id*=submit]").click(function() {
+				var v_data = {};
+				v_data.username = $.trim($("[id*=username").val());
+				v_data.password = $.trim($("[id*=password]").val());
+				$.ajax({
 					type : "POST",
 					url : "loginservlet",
-					contentType : "application/json",
-					data : JSON.stringify(data),
+					data : JSON.stringify(v_data),
+					contentType : "application/json; charset=utf-8",
+					dataType : "json",
 					success : function(result) {
-						console.log(result);
-					},
-					error : function(result) {
-						console.log(result);
+						console.log("done");
 					}
 				});
-
+				return false;
 			});
 		});
 	</script>
